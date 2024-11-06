@@ -1,6 +1,6 @@
 ﻿using VismaTechnicalTest.Abstractions;
 
-namespace VismaTechnicalTest.Services.Discount
+namespace VismaTechnicalTest.Services.DiscountModels
 {
     public class CompositeDiscount : IDiscount
     {
