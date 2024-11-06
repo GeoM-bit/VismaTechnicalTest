@@ -1,6 +1,19 @@
 ﻿@model ProductSelectionViewModel
 
-<h2>Products for @Model.CustomerName</h2>
+<h4>Available Discounts for @Model.CustomerName</h4>
+@if (Model.AvailableDiscounts.Any())
+{
+    <ul>
+        @foreach (var discount in Model.AvailableDiscounts)
+        {
+            <li>@Model.GetDiscountMessage(discount)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No discounts available for this customer.</p>
+}
 
 <form asp-action="CalculatePrice" method="post">
     <input type="hidden" asp-for="CustomerId" />
@@ -20,13 +33,15 @@
                 <tr>
                     <td>@Model.ProductsToOrder[i].Name</td>
                     <td>@Model.ProductsToOrder[i].StandardPrice.ToString("C")</td>
-                    <td>@(@Model.ProductsToOrder[i].HasSpecialDiscount? "Yes":"No")</td>
-                    <td>@(Math.Round(@Model.ProductsToOrder[i].SpecialDiscount * 100,1)) %</td>
+                    <td>@(@Model.ProductsToOrder[i].HasSpecialDiscount && @Model.AvailableDiscounts.Contains(VismaTechnicalTest.Common.DiscountType.SPECIAL_DEAL) ? "Yes" : "No")</td>
+                    <td>@(@Model.AvailableDiscounts.Contains(VismaTechnicalTest.Common.DiscountType.SPECIAL_DEAL)? Math.Round(@Model.ProductsToOrder[i].SpecialDiscount * 100,1) : 0)%</td>
                     <td>
                         <input type="number" name="ProductsToOrder[@i].Quantity" class="form-control" min="0" />
                         <input type="hidden" name="ProductsToOrder[@i].Id" value="@Model.ProductsToOrder[i].Id" />
                         <input type="hidden" name="ProductsToOrder[@i].Name" value="@Model.ProductsToOrder[i].Name" />
                         <input type="hidden" name="ProductsToOrder[@i].StandardPrice" value="@Model.ProductsToOrder[i].StandardPrice" />
+                        <input type="hidden" name="ProductsToOrder[@i].HasSpecialDiscount" value="@(Model.ProductsToOrder[i].HasSpecialDiscount ? "true" : "false")" />
+                        <input type="hidden" name="ProductsToOrder[@i].SpecialDiscount" value="@Model.ProductsToOrder[i].SpecialDiscount" />
                     </td>
                 </tr>
             }

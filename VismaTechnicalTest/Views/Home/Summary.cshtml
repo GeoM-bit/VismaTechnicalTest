@@ -1,11 +1,25 @@
 ﻿@model ProductSelectionViewModel
 
 <h2>Order Summary for @ViewBag.CustomerName</h2>
-
+@if (Model.AvailableDiscounts.Any())
+{
+    <ul>
+        @foreach (var discount in Model.AvailableDiscounts)
+        {
+            <li>@Model.GetDiscountMessage(discount)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No discounts available for this customer.</p>
+}
 <table class="table">
     <thead>
         <tr>
             <th>Product</th>
+            <th>Special deal</th>
+            <th>Discount</th>
             <th>Standard Price per product</th>
             <th>Discounted Price per product</th>
             <th>Quantity</th>
@@ -18,6 +32,8 @@
         {
             <tr>
                 <td>@product.Name</td>
+                <td>@(product.HasSpecialDiscount && @Model.AvailableDiscounts.Contains(VismaTechnicalTest.Common.DiscountType.SPECIAL_DEAL) ? "Yes" : "No")</td>
+                <td>@(@Model.AvailableDiscounts.Contains(VismaTechnicalTest.Common.DiscountType.SPECIAL_DEAL) ? Math.Round(product.SpecialDiscount * 100, 1) : 0)%</td>
                 <td>@product.StandardPrice.ToString("C")</td>
                 <td>@product.DiscountedPrice.ToString("C")</td>
                 <td>@product.Quantity</td>

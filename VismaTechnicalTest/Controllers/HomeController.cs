@@ -11,12 +11,15 @@ namespace VismaTechnicalTest.Controllers
         private readonly IDiscountService _discountService;
         private readonly ICustomerRepository _customerRepository;
         private readonly IProductRepository _productRepository;
-        public HomeController(ILogger<HomeController> logger, IDiscountService discountService, ICustomerRepository customerRepository, IProductRepository productRepository)
+        private readonly IDiscountRepository _discountRepository;
+        public HomeController(ILogger<HomeController> logger, IDiscountService discountService, 
+            ICustomerRepository customerRepository, IProductRepository productRepository, IDiscountRepository discountRepository)
         {
             _logger = logger;
             _discountService = discountService;
             _customerRepository = customerRepository;
             _productRepository = productRepository;
+            _discountRepository = discountRepository;
         }
 
         public IActionResult Index()
@@ -59,6 +62,7 @@ namespace VismaTechnicalTest.Controllers
             {
                 CustomerId = customer.Id,
                 CustomerName = customer.Name,
+                AvailableDiscounts = _customerRepository.GetDiscountTypesForCustomer(customer.Id),
                 ProductsToOrder = products.Select(p => new ProductToOrder
                 {
                     Id = p.Id,
@@ -66,19 +70,18 @@ namespace VismaTechnicalTest.Controllers
                     StandardPrice = p.StandardPrice,
                     HasSpecialDiscount = p.HasSpecialDiscount,
                     SpecialDiscount = p.SpecialDiscount,
-                    Quantity = 0
+                    Quantity = 0,
                 }).ToList()
             };
 
             return View(viewModel);
         }
 
-
-
         [HttpPost]
         public IActionResult CalculatePrice(ProductSelectionViewModel viewModel)
         {
             viewModel.ProductsToOrder = viewModel.ProductsToOrder.Where(x => x.Quantity > 0).ToList();
+            viewModel.AvailableDiscounts = _customerRepository.GetDiscountTypesForCustomer(viewModel.CustomerId);
             var customer = _customerRepository.GetCustomerById(viewModel.CustomerId);
             if (customer == null) return NotFound();
 

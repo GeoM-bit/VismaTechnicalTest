@@ -7,6 +7,6 @@ namespace VismaTechnicalTest.Abstractions
     {
         public List<Customer> GetCustomers();
         public Customer? GetCustomerById(int id);
-        public List<DiscountType> GetDiscountTypesForCustomer(Customer customer);
+        public List<DiscountType> GetDiscountTypesForCustomer(int customerId);
     }
 }

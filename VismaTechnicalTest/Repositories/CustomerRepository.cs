@@ -24,20 +24,20 @@ namespace VismaTechnicalTest.Repositories
             return customers;
         }
 
-        public List<DiscountType> GetDiscountTypesForCustomer(Customer customer)
+        public List<DiscountType> GetDiscountTypesForCustomer(int id)
         {
-            if (customer.Id == 1)
+            if (id == 1)
                 return
                 [
                     DiscountType.VOLUME,
                     DiscountType.SPECIAL_DEAL
                 ];
-            else if (customer.Id == 2)
+            else if (id == 2)
                 return
                 [
                     DiscountType.SEASONAL
                 ];
-            else if (customer.Id == 3)
+            else if (id == 3)
                 return
                 [
                     DiscountType.LOYALTY

@@ -17,7 +17,7 @@ namespace VismaTechnicalTest.Services
 
         public IDiscount CreateDiscount(Customer customer, ProductToOrder product)
         {
-            List<DiscountType> customerDiscounts = _customerRepository.GetDiscountTypesForCustomer(customer);
+            List<DiscountType> customerDiscounts = _customerRepository.GetDiscountTypesForCustomer(customer.Id);
             var discountTypesDictionary = _discountRepository.GetDiscountsDictionary();
 
             CompositeDiscount compositeDiscount = new();
