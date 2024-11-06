@@ -1,7 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model CustomerSelectionViewModel
 
-<div class="text-center">
-   
-</div>
+<h2>Select Customer</h2>
+
+<form asp-action="SelectCustomer" method="post">
+    <div class="form-group">
+        <label for="SelectedCustomerId">Choose a Customer:</label>
+        <select asp-for="SelectedCustomerId" asp-items="@(new SelectList(Model.Customers, "Id", "Name"))" class="form-control">
+            <option value="">-- Select a Customer --</option>
+        </select>
+        <span asp-validation-for="SelectedCustomerId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Continue</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

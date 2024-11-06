@@ -16,5 +16,10 @@
             this.HasSpecialDiscount = HasSpecialDiscount;
             this.SpecialDiscount = SpecialDiscount;
         }
+
+        public Product()
+        {
+                
+        }
     }
 }

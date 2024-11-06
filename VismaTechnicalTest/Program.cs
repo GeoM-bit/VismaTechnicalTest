@@ -1,5 +1,6 @@
 using VismaTechnicalTest.Abstractions;
 using VismaTechnicalTest.Repositories;
+using VismaTechnicalTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 builder.Services.AddSingleton<IDiscountRepository, DiscountRepository>();
+builder.Services.AddSingleton<IDiscountService, DiscountService>();
 
 var app = builder.Build();
 

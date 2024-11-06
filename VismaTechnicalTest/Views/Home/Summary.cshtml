@@ -1,0 +1,32 @@
+﻿@model ProductSelectionViewModel
+
+<h2>Order Summary for @ViewBag.CustomerName</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Standard Price per product</th>
+            <th>Discounted Price per product</th>
+            <th>Quantity</th>
+            <th>Standard subtotal</th>
+            <th>Discounted subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.ProductsToOrder)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.StandardPrice.ToString("C")</td>
+                <td>@product.DiscountedPrice.ToString("C")</td>
+                <td>@product.Quantity</td>
+                <td>@((product.Quantity * product.StandardPrice).ToString("C"))</td>
+                <td>@((product.Quantity * product.DiscountedPrice).ToString("C"))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Standard Total Price: @ViewBag.StandardTotalPrice.ToString("C")</h3>
+<h3>Discounted Total Price: @ViewBag.DiscountedTotalPrice.ToString("C")</h3>
