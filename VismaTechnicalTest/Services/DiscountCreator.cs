@@ -30,7 +30,7 @@ namespace VismaTechnicalTest.Services
                 }
             }
 
-            return compositeDiscount._discounts.Count != 0 ? compositeDiscount : new NoDiscount();
+            return compositeDiscount.discounts.Count != 0 ? compositeDiscount : new NoDiscount();
         }
     }
 }
