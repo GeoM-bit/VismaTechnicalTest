@@ -3,7 +3,7 @@ using VismaTechnicalTest.Common;
 using VismaTechnicalTest.Models;
 using VismaTechnicalTest.Services.DiscountAplicability;
 
-namespace VismaTechnicalTest.Repositories
+namespace VismaTechnicalTest.Services
 {
     public class DiscountProvider : IDiscountProvider
     {
