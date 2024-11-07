@@ -5,7 +5,7 @@ using VismaTechnicalTest.Services.DiscountModels;
 
 namespace VismaTechnicalTest.Services
 {
-    public class DiscountCreator
+    public class DiscountCreator : IDiscountCreator
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IDiscountRepository _discountRepository;
@@ -15,9 +15,9 @@ namespace VismaTechnicalTest.Services
             _discountRepository = discountRepository;
         }
 
-        public IDiscount CreateDiscount(Customer customer, ProductToOrder product)
+        public IDiscount CreateDiscount(int customerId, ProductToOrder product)
         {
-            List<DiscountType> customerDiscounts = _customerRepository.GetDiscountTypesForCustomer(customer.Id);
+            var customerDiscounts = _customerRepository.GetDiscountTypesForCustomer(customerId);
             var discountTypesDictionary = _discountRepository.GetDiscountsDictionary();
 
             CompositeDiscount compositeDiscount = new();

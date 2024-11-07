@@ -10,6 +10,7 @@ builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 builder.Services.AddSingleton<IDiscountRepository, DiscountRepository>();
 builder.Services.AddSingleton<IDiscountService, DiscountService>();
+builder.Services.AddSingleton<IDiscountCreator, DiscountCreator>();
 
 var app = builder.Build();
 

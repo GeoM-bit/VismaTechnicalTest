@@ -5,18 +5,18 @@ namespace VismaTechnicalTest.Services
 {
     public class DiscountService : IDiscountService
     {
-        private readonly DiscountCreator _discountCreator;
+        private readonly IDiscountCreator _discountCreator;
 
-        public DiscountService(ICustomerRepository customerRepository, IDiscountRepository discountRepository)
+        public DiscountService(IDiscountCreator discountCreator)
         {
-            _discountCreator = new DiscountCreator(customerRepository, discountRepository);
+            _discountCreator = discountCreator;
         }
 
-        public decimal CalculatePrice(Customer customer, ProductToOrder product)
+        public decimal CalculatePrice(int customerId, ProductToOrder product)
         {
-            IDiscount discountCalculator = _discountCreator.CreateDiscount(customer, product);
+            IDiscount discountCalculator = _discountCreator.CreateDiscount(customerId, product);
+
             return discountCalculator.CalculatePrice(product.StandardPrice);              
         }
-
     }
 }

@@ -45,6 +45,10 @@ else
                     </td>
                 </tr>
             }
+            @foreach (var discount in Model.AvailableDiscounts)
+            {
+                <input type="hidden" name="AvailableDiscounts" value="@discount" />
+            }
         </tbody>
     </table>
 
