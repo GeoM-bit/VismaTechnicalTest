@@ -5,5 +5,4 @@
         public int SelectedCustomerId { get; set; }
         public List<Customer> Customers { get; set; } = new();
     }
-
 }

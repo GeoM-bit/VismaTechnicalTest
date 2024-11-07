@@ -9,7 +9,7 @@ namespace VismaTechnicalTest.Services.DiscountAplicability
     {
         public IDiscount GetDiscount(ProductToOrder product)
         {
-            return product.Quantity > 0 && (DateTime.Now.Month == 7 || DateTime.Now.Month == 12) ?
+            return product.Quantity > 0 && (DateTime.Now.Month == 7 || DateTime.Now.Month == 11) ?
                 new Discount(Constants.SeasonalDiscountRate) : new NoDiscount();
         }
     }
