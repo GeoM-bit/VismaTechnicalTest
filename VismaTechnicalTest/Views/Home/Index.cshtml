@@ -7,7 +7,6 @@
 
 <form asp-action="SelectCustomer" method="post">
     <div class="form-group">
-        <label for="SelectedCustomerId">Choose a Customer:</label>
         <select asp-for="SelectedCustomerId" asp-items="@(new SelectList(Model.Customers, "Id", "Name"))" class="form-control">
             <option value="">-- Select a Customer --</option>
         </select>
