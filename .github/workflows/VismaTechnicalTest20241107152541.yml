@@ -1,10 +1,10 @@
-name: Build and deploy .NET Core application to Web App vismapricecalculator
+name: Build and deploy .NET Core application to Web App VismaTechnicalTest20241107152541
 on:
   push:
     branches:
     - master
 env:
-  AZURE_WEBAPP_NAME: vismapricecalculator
+  AZURE_WEBAPP_NAME: VismaTechnicalTest20241107152541
   AZURE_WEBAPP_PACKAGE_PATH: VismaTechnicalTest\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
@@ -44,5 +44,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.vismapricecalculator_F3AD }}
+        publish-profile: ${{ secrets.VismaTechnicalTest20241107152541_3C89 }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
