@@ -8,17 +8,17 @@ namespace VismaTechnicalTest.Services
     public class DiscountCreator : IDiscountCreator
     {
         private readonly ICustomerRepository _customerRepository;
-        private readonly IDiscountRepository _discountRepository;
-        public DiscountCreator(ICustomerRepository customerRepository, IDiscountRepository discountRepository)
+        private readonly IDiscountProvider _discountProvider;
+        public DiscountCreator(ICustomerRepository customerRepository, IDiscountProvider discountProvider)
         {
             _customerRepository = customerRepository;
-            _discountRepository = discountRepository;
+            _discountProvider = discountProvider;
         }
 
         public IDiscount CreateDiscount(int customerId, ProductToOrder product)
         {
             var customerDiscounts = _customerRepository.GetDiscountTypesForCustomer(customerId);
-            var discountTypesDictionary = _discountRepository.GetDiscountsDictionary();
+            var discountTypesDictionary = _discountProvider.GetDiscountsDictionary();
 
             CompositeDiscount compositeDiscount = new();
 
